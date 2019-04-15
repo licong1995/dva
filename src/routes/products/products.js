@@ -4,9 +4,9 @@ import { Button } from 'antd';
 
 import ProductList from '../../components/productList/ProductList';
 
-const Products = ({ dispatch, products, count }) => {
+const Products = (props) => {
   function handleDelete(id) {
-    dispatch({
+    props.dispatch({
       type: 'products/delete',
       payload: {
         id
@@ -15,23 +15,28 @@ const Products = ({ dispatch, products, count }) => {
   }
 
   function handleReduce(){
-    dispatch({
+    props.dispatch({
       type: 'products/reduce'
     });
   }
 
-  function handleAdd(){
-    dispatch({
-      type: 'products/add'
+  // function handleAdd(){
+  //   dispatch({
+  //     type: 'products/add'
+  //   });
+  // }
+  function handleAddAfter1Second(){
+    props.dispatch({
+      type: 'products/addAfter1Second'
     });
   }
   
   return (
     <div>
       <h2>List of Products</h2>
-      <ProductList onDelete={handleDelete} products={products} />
+      <ProductList onDelete={handleDelete} products={props.products} />
       <div>
-        <Button onClick={handleReduce}>-</Button>{count}<Button onClick={handleAdd}>+</Button>
+        <Button onClick={handleReduce}>-</Button>{props.count}<Button onClick={handleAddAfter1Second}>+</Button>
       </div>
         
     </div>
